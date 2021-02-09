@@ -27,7 +27,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -93,13 +93,13 @@ limitations under the License.
        num_spur_gear_teeth = 68
        num_pinion_gear_teeth = 19
        final_gear_ratio = (num_spur_gear_teeth / num_pinion_gear_teeth) *
-         5.22 = 18.68
+       5.22 = 18.68
        stall_torque = 0.549 N m
        axle_eff_limit = ((2 * stall_torque) * final_gear_ratio) / 4 =
-         5.12766 N m
+       5.12766 N m
        max_speed = 40 mph (30+ mph) = 17.8816 m/s
        axle_vel_limit = (2 * pi) * (max_speed / (pi * tire_dia)) =
-         244.8696 rad/s -->
+       244.8696 rad/s -->
   <xacro:property name="axle_eff_limit" value="5.12766"/>
   <xacro:property name="axle_vel_limit" value="244.8696"/>
 
@@ -131,15 +131,15 @@ limitations under the License.
   <!-- Inertia of a solid cuboid. Width is measured along the x axis, depth
        along the y axis, and height along the z axis. -->
   <xacro:macro name="solid_cuboid_inertial"
-               params="width depth height mass *origin">
+	       params="width depth height mass *origin">
     <inertial>
       <xacro:insert_block name="origin"/>
       <mass value="${mass}"/>
       <inertia ixx="${mass * (depth * depth + height * height) / 12}"
-               ixy="0" ixz="0"
-               iyy="${mass * (width * width + height * height) / 12}"
-               iyz="0"
-               izz="${mass * (width * width + depth * depth) / 12}"/>
+	       ixy="0" ixz="0"
+	       iyy="${mass * (width * width + height * height) / 12}"
+	       iyz="0"
+	       izz="${mass * (width * width + depth * depth) / 12}"/>
     </inertial>
   </xacro:macro>
 
@@ -147,17 +147,17 @@ limitations under the License.
        measured along the z axis, which is the tube's axis. inner_rad and
        outer_rad are the tube's inner and outer radii, respectively. -->
   <xacro:macro name="thick_walled_tube_inertial"
-               params="inner_rad outer_rad height mass">
+	       params="inner_rad outer_rad height mass">
     <inertial>
       <mass value="${mass}"/>
       <inertia ixx="${(1 / 12) * mass * (3 * (inner_rad * inner_rad +
-                    outer_rad * outer_rad) + height * height)}"
-               ixy="0" ixz="0"
-               iyy="${(1 / 12) * mass * (3 * (inner_rad * inner_rad +
-                    outer_rad * outer_rad) + height * height)}"
-               iyz="0"
-               izz="${mass * (inner_rad * inner_rad +
-                    outer_rad * outer_rad) / 2}"/>
+		    outer_rad * outer_rad) + height * height)}"
+	       ixy="0" ixz="0"
+	       iyy="${(1 / 12) * mass * (3 * (inner_rad * inner_rad +
+		    outer_rad * outer_rad) + height * height)}"
+	       iyz="0"
+	       izz="${mass * (inner_rad * inner_rad +
+		    outer_rad * outer_rad) / 2}"/>
     </inertial>
   </xacro:macro>
 
@@ -167,9 +167,9 @@ limitations under the License.
       <parent link="chassis"/>
       <child link="${prefix}_battery_offset"/>
       <origin xyz="${battery_x_offset - battery_length / 2}
-                   ${reflect * battery_dist / 2}
-                   0"
-              rpy="${reflect * battery_comp_angle} 0 0"/>
+		   ${reflect * battery_dist / 2}
+		   0"
+	      rpy="${reflect * battery_comp_angle} 0 0"/>
     </joint>
 
     <link name="${prefix}_battery_offset">
@@ -180,28 +180,28 @@ limitations under the License.
       <parent link="${prefix}_battery_offset"/>
       <child link="${prefix}_battery"/>
       <origin xyz="0
-                   ${reflect * battery_width / 2}
-                   ${(battery_height / 2) - battery_comp_depth}"/>
+		   ${reflect * battery_width / 2}
+		   ${(battery_height / 2) - battery_comp_depth}"/>
     </joint>
 
     <link name="${prefix}_battery">
       <visual>
-        <geometry>
-          <box size="${battery_length} ${battery_width} ${battery_height}"/>
-        </geometry>
-        <material name="battery_mat"/>
+	<geometry>
+	  <box size="${battery_length} ${battery_width} ${battery_height}"/>
+	</geometry>
+	<material name="battery_mat"/>
       </visual>
 
       <collision>
-        <geometry>
-          <box size="${battery_length} ${battery_width} ${battery_height}"/>
-        </geometry>
+	<geometry>
+	  <box size="${battery_length} ${battery_width} ${battery_height}"/>
+	</geometry>
       </collision>
 
       <xacro:solid_cuboid_inertial
-         width="${battery_length}" depth="${battery_width}"
-         height="${battery_height}" mass="${battery_mass}">
-        <origin/>
+	  width="${battery_length}" depth="${battery_width}"
+	  height="${battery_height}" mass="${battery_mass}">
+	<origin/>
       </xacro:solid_cuboid_inertial>
     </link>
 
@@ -212,28 +212,28 @@ limitations under the License.
 
   <!-- Shock absorber -->
   <xacro:macro name="shock"
-               params="lr_prefix fr_prefix lr_reflect fr_reflect child">
+	       params="lr_prefix fr_prefix lr_reflect fr_reflect child">
     <joint name="${lr_prefix}_${fr_prefix}_shock" type="prismatic">
       <parent link="chassis"/>
       <child link="${child}"/>
 
       <origin xyz="${fr_reflect * wheelbase / 2}
-                   ${lr_reflect * ((hex_hub_dist / 2) - axle_length)}
-                   ${(wheel_travel / 2) - shock_z_offset}"/>
+		   ${lr_reflect * ((hex_hub_dist / 2) - axle_length)}
+		   ${(wheel_travel / 2) - shock_z_offset}"/>
       <axis xyz="0 0 -1"/>
       <limit lower="${-wheel_travel / 2}" upper="${wheel_travel / 2}"
-             effort="${shock_eff_limit}" velocity="${shock_vel_limit}"/>
+	     effort="${shock_eff_limit}" velocity="${shock_vel_limit}"/>
     </joint>
     <transmission name="${lr_prefix}_${fr_prefix}_shock_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${lr_prefix}_${fr_prefix}_shock">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${lr_prefix}_${fr_prefix}_shock_act">
-        <!-- This hardwareInterface element exists for compatibility
-             with ROS Hydro. -->
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
+	<!-- This hardwareInterface element exists for compatibility
+	     with ROS Hydro. -->
+	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	<mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
   </xacro:macro>
@@ -245,7 +245,7 @@ limitations under the License.
     </link>
 
     <!-- The left and right axles have the same axis so that identical
-         rotation values cause the wheels to rotate in the same direction. -->
+	 rotation values cause the wheels to rotate in the same direction. -->
     <joint name="${lr_prefix}_${fr_prefix}_axle" type="continuous">
       <parent link="${lr_prefix}_${fr_prefix}_axle_carrier"/>
       <child link="${lr_prefix}_${fr_prefix}_wheel"/>
@@ -256,41 +256,41 @@ limitations under the License.
     <transmission name="${lr_prefix}_${fr_prefix}_axle_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${lr_prefix}_${fr_prefix}_axle">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${lr_prefix}_${fr_prefix}_axle_act">
-        <!-- This hardwareInterface element exists for compatibility
-             with ROS Hydro. -->
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
+	<!-- This hardwareInterface element exists for compatibility
+	     with ROS Hydro. -->
+	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	<mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
 
     <link name="${lr_prefix}_${fr_prefix}_wheel">
       <visual>
-        <origin xyz="0
-                     ${lr_reflect * (axle_length - (tire_width / 
-                     2 - hex_hub_depth))}
-                     0"/>
-        <geometry>
-          <cylinder radius="${tire_dia / 2}" length="${tire_width}"/>
-        </geometry>
-        <material name="tire_mat"/>
+	<origin xyz="0
+		     ${lr_reflect * (axle_length - (tire_width / 
+		     2 - hex_hub_depth))}
+		     0"/>
+	<geometry>
+	  <cylinder radius="${tire_dia / 2}" length="${tire_width}"/>
+	</geometry>
+	<material name="tire_mat"/>
       </visual>
 
       <collision>
-        <origin xyz="0
-                     ${lr_reflect * (axle_length - (tire_width / 
-                     2 - hex_hub_depth))}
-                     0"/>
-        <geometry>
-          <cylinder radius="${tire_dia / 2}" length="${tire_width}"/>
-        </geometry>
+	<origin xyz="0
+		     ${lr_reflect * (axle_length - (tire_width / 
+		     2 - hex_hub_depth))}
+		     0"/>
+	<geometry>
+	  <cylinder radius="${tire_dia / 2}" length="${tire_width}"/>
+	</geometry>
       </collision>
 
       <xacro:thick_walled_tube_inertial
-          inner_rad="${hub_dia / 2}" outer_rad="${tire_dia / 2}"
-          height="${tire_width}" mass="${wheel_mass}"/>
+	  inner_rad="${hub_dia / 2}" outer_rad="${tire_dia / 2}"
+	  height="${tire_width}" mass="${wheel_mass}"/>
     </link>
 
     <gazebo reference="${lr_prefix}_${fr_prefix}_wheel">
@@ -300,10 +300,10 @@ limitations under the License.
 
   <!-- Front wheel -->
   <xacro:macro name="front_wheel"
-               params="lr_prefix fr_prefix lr_reflect fr_reflect">
+	       params="lr_prefix fr_prefix lr_reflect fr_reflect">
     <xacro:shock lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
-                 lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}"
-                 child="${lr_prefix}_steering_link"/>
+		 lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}"
+		 child="${lr_prefix}_steering_link"/>
 
     <link name="${lr_prefix}_steering_link">
       <xacro:null_inertial/>
@@ -314,33 +314,33 @@ limitations under the License.
       <child link="${lr_prefix}_${fr_prefix}_axle_carrier"/>
       <axis xyz="0 0 1"/>
       <limit lower="${-degrees_45}" upper="${degrees_45}"
-             effort="${servo_stall_torque}" velocity="${servo_no_load_speed}"/>
+	     effort="${servo_stall_torque}" velocity="${servo_no_load_speed}"/>
     </joint>
     <transmission name="${lr_prefix}_steering_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${lr_prefix}_steering_joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${lr_prefix}_steering_act">
-        <!-- This hardwareInterface element exists for compatibility
-             with ROS Hydro. -->
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
+	<!-- This hardwareInterface element exists for compatibility
+	     with ROS Hydro. -->
+	<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	<mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
 
     <xacro:wheel lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
-                 lr_reflect="${lr_reflect}"/>
+		 lr_reflect="${lr_reflect}"/>
   </xacro:macro>
 
   <!-- Rear wheel -->
   <xacro:macro name="rear_wheel"
-               params="lr_prefix fr_prefix lr_reflect fr_reflect">
+	       params="lr_prefix fr_prefix lr_reflect fr_reflect">
     <xacro:shock lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
-                 lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}"
-                 child="${lr_prefix}_${fr_prefix}_axle_carrier"/>
+		 lr_reflect="${lr_reflect}" fr_reflect="${fr_reflect}"
+		 child="${lr_prefix}_${fr_prefix}_axle_carrier"/>
     <xacro:wheel lr_prefix="${lr_prefix}" fr_prefix="${fr_prefix}"
-                 lr_reflect="${lr_reflect}"/>
+		 lr_reflect="${lr_reflect}"/>
   </xacro:macro>
 
   <!-- base_link must have geometry so that its axes can be displayed in
@@ -348,7 +348,7 @@ limitations under the License.
   <link name="base_link">
     <visual>
       <geometry>
-        <box size="0.01 0.01 0.01"/>
+	<box size="0.01 0.01 0.01"/>
       </geometry>
       <material name="chassis_mat"/>
     </visual>
@@ -362,7 +362,7 @@ limitations under the License.
     <visual>
       <origin xyz="0 0 ${-chassis_height / 2}"/>
       <geometry>
-        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+	<box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
       <material name="chassis_mat"/>
     </visual>
@@ -370,13 +370,13 @@ limitations under the License.
     <collision>
       <origin xyz="0 0 ${-chassis_height / 2}"/>
       <geometry>
-        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+	<box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
     </collision>
 
     <xacro:solid_cuboid_inertial
-        width="${chassis_length}" depth="${chassis_width}"
-        height="${chassis_height}" mass="${chassis_mass}">
+	width="${chassis_length}" depth="${chassis_width}"
+	height="${chassis_height}" mass="${chassis_mass}">
       <origin xyz="0 0 ${-chassis_height / 2}"/>
     </xacro:solid_cuboid_inertial>
   </link>
@@ -395,15 +395,25 @@ limitations under the License.
 
   <!-- Wheels -->
   <xacro:front_wheel lr_prefix="left" fr_prefix="front"
-                     lr_reflect="1" fr_reflect="1"/>
+		     lr_reflect="1" fr_reflect="1"/>
   <xacro:front_wheel lr_prefix="right" fr_prefix="front"
-                     lr_reflect="-1" fr_reflect="1"/>
+		     lr_reflect="-1" fr_reflect="1"/>
   <xacro:rear_wheel lr_prefix="left" fr_prefix="rear"
-                    lr_reflect="1" fr_reflect="-1"/>
+		    lr_reflect="1" fr_reflect="-1"/>
   <xacro:rear_wheel lr_prefix="right" fr_prefix="rear"
-                    lr_reflect="-1" fr_reflect="-1"/>
+		    lr_reflect="-1" fr_reflect="-1"/>
+
 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
   </gazebo>
+
+  <!-- Sensors -->
+  <!-- Import macro for realsense-RS200 camera-->
+  <xacro:include filename="$(find realsense_gazebo_plugin)/urdf/realsense-RS200.macro.xacro"/>
+  <!-- Create camera instance -->
+  <xacro:realsense-rs200 prefix="" parent="chassis">
+    <origin xyz="0 0 0.1" rpy="0 0 0" />   
+  </xacro:realsense-rs200>
+
 </robot>

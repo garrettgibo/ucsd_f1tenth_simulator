@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
 """ackermann_controller
+
 Control the wheels of a vehicle with Ackermann steering.
+
 Subscribed Topics:
     ackermann_cmd (ackermann_msgs/AckermannDrive)
         Ackermann command. It contains the vehicle's desired speed and steering
         angle.
+
 Published Topics:
     <left steering controller name>/command (std_msgs/Float64)
         Command for the left steering controller.
@@ -22,10 +25,12 @@ Published Topics:
     <shock absorber controller name>/command (std_msgs/Float64)
         One of these topics exists for each shock absorber. They are latched
         topics.
+
 Services Called:
     controller_manager/list_controllers (controller_manager_msgs/
                                          ListControllers)
         List the states of the controllers.
+
 Parameters:
     ~left_front_wheel/steering_link_name (string, default: left_steering_link)
     ~right_front_wheel/steering_link_name (string,
@@ -81,11 +86,15 @@ Required tf Transforms:
     <~left_rear_wheel/link_name> to <~right_rear_wheel/link_name>
         Specifies the position of the left rear wheel in the right rear
         wheel's frame.
+
 Copyright (c) 2013-2015 Wunderkammer Laboratory
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
+
   http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

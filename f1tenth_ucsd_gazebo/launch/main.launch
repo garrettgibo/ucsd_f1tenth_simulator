@@ -1,0 +1,22 @@
+<launch>
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+
+  <!-- simulation -->
+  <include file="$(find f1tenth_ucsd_gazebo)/launch/ucsd_track_v1_world.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="namespace" value="gazebo" />
+  </include>
+
+  <!-- robot -->
+  <include file="$(find f1tenth_ucsd_gazebo)/launch/launch_vehicle.launch">
+    <arg name="x" value="0.0"/>
+    <arg name="y" value="2.20"/>
+    <arg name="z" value="0.05"/>
+    <arg name="roll" value="0.0"/>
+    <arg name="pitch" value="0.0"/>
+    <arg name="yaw" value="0" />
+    <arg name="namespace" value="vehicle" />
+  </include>
+</launch>

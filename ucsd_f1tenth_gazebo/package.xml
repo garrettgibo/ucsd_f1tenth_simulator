@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>f1tenth_ucsd_gazebo</name>
+  <name>ucsd_f1tenth_gazebo</name>
   <version>0.0.0</version>
-  <description>The f1tenth_ucsd_gazebo package</description>
+  <description>The ucsd_f1tenth_gazebo package</description>
 
   <maintainer email="ggibo@ucsd.edu">user</maintainer>
 

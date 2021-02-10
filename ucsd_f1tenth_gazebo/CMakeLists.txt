@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(f1tenth_ucsd_gazebo)
+project(ucsd_f1tenth_gazebo)
 
 find_package(catkin REQUIRED)
 

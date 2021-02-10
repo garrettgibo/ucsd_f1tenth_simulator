@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>f1tenth_description</name>
+  <name>ucsd_f1tenth_description</name>
   <version>1.0.0</version>
-  <description>The f1tenth_description package</description>
+  <description>The ucsd_f1tenth_description package</description>
 
   <maintainer email="ggibo@uscd.edu">Garrett Gibo</maintainer>
 

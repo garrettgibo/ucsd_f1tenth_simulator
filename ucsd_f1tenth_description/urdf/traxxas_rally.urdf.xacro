@@ -408,12 +408,7 @@ limitations under the License.
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
   </gazebo>
 
-  <!-- Sensors -->
-  <!-- Import macro for realsense-RS200 camera-->
-  <xacro:include filename="$(find realsense_gazebo_plugin)/urdf/realsense-RS200.macro.xacro"/>
-  <!-- Create camera instance -->
-  <xacro:realsense-rs200 prefix="" parent="chassis">
-    <origin xyz="0 0 0.1" rpy="0 0 0" />   
-  </xacro:realsense-rs200>
+  <!-- Include Sensor Plugins -->
+  <xacro:include filename="$(find ucsd_f1tenth_description)/urdf/sensors.xacro"/>
 
 </robot>

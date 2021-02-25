@@ -126,6 +126,7 @@ class _AckermannCtrlr(object):
         """Initialize this _AckermannCtrlr."""
 
         rospy.init_node("ackermann_controller")
+        rospy.logwarn("Ackermann controller started")
 
         # Parameters
 

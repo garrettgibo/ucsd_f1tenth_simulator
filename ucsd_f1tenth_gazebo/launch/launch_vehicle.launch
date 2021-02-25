@@ -41,6 +41,10 @@ limitations under the License.
   <arg name="pitch" default="0.0"/>
   <arg name="yaw" default="0.0"/>
 
+  <arg name="ackermann_cmd_topic" default="/vehicle/ackermann_cmd" />
+  <arg name="twist_cmd_topic" default="/vehicle/cmd_vel" />
+  <arg name="odom_topic" default="/vehicle/odom" />
+
   <include file="$(find ucsd_f1tenth_description)/launch/f1tenth_ackermann.launch">
     <arg name="namespace" value="$(arg namespace)"/>
   </include>
@@ -64,5 +68,21 @@ limitations under the License.
       <param name="cmd_timeout" value="$(arg cmd_timeout)"/>
       <rosparam file="$(find ucsd_f1tenth_gazebo)/config/traxxas_rally_ackermann_ctrlr_params.yaml" command="load"/>
     </node>
+
+    <!-- Convert cmd_vel to ackermann drive -->
+    <node name="cmd_vel_to_ackermann_drive" pkg="ucsd_f1tenth_gazebo"
+          type="cmd_vel_to_ackermann_drive.py" >
+      <param name="twist_cmd_topic" value="$(arg twist_cmd_topic)" />
+      <param name="ackermann_cmd_topic" value="$(arg ackermann_cmd_topic)" />
+    </node>
+
+    <!-- Publishe odometry transform -->
+    <node name="odometry_tf_publisher" pkg="ucsd_f1tenth_gazebo"
+          type="odometry_tf_publisher.py" >
+      <param name="odom_topic" value="$(arg odom_topic)" />
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="odom_to_map"
+          args="1 0 0 0 0 0 1 map odom 100" />
   </group>
 </launch>

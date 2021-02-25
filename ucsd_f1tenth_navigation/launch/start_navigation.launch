@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find ucsd_f1tenth_navigation)/launch/start_navsat.launch" />
+
+  <!-- Run the ekf for map to odom config -->
+  <node pkg="robot_localization"
+        type="ekf_localization_node"
+        name="ekf_localization_with_gps">
+        <!-- name="ekf_se_map"> -->
+    <rosparam command="load"
+              file="$(find ucsd_f1tenth_navigation)/config/robot_localization.yaml" />
+  </node>
+
+  <!-- Run the map server -->
+  <include file="$(find ucsd_f1tenth_navigation)/launch/start_map_server.launch" />
+
+  <!--- Run Move Base -->
+  <include file="$(find ucsd_f1tenth_navigation)/launch/start_move_base.launch" />
+
+  
+
+</launch>

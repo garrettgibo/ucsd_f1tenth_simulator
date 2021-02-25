@@ -1,6 +1,9 @@
+<?xml version="1.0"?>
 <launch>
   <arg name="gui" default="true"/>
   <arg name="paused" default="false"/>
+  <arg name="starting_x" default="0"/>
+  <arg name="starting_y" default="2.2"/>
 
   <!-- simulation -->
   <include file="$(find ucsd_f1tenth_gazebo)/launch/ucsd_track_v1_world.launch">
@@ -11,12 +14,20 @@
 
   <!-- robot -->
   <include file="$(find ucsd_f1tenth_gazebo)/launch/launch_vehicle.launch">
-    <arg name="x" value="0.0"/>
-    <arg name="y" value="2.20"/>
+    <arg name="x" value="$(arg starting_x)"/>
+    <arg name="y" value="$(arg starting_y)"/>
     <arg name="z" value="0.05"/>
     <arg name="roll" value="0.0"/>
     <arg name="pitch" value="0.0"/>
     <arg name="yaw" value="0" />
     <arg name="namespace" value="vehicle" />
   </include>
+
+  <include file="$(find ucsd_f1tenth_navigation)/launch/start_navigation.launch" />
+  <!-- <include file="$(find ucsd_f1tenth_navigation_v2)/launch/follow_waypoints.launch" > -->
+  <!--   <arg name="starting_x" value="$(arg starting_x)"/> -->
+  <!--   <arg name="starting_y" value="$(arg starting_y)"/> -->
+  <!-- </include>> -->
+
+
 </launch>

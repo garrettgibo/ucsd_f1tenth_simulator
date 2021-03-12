@@ -37,10 +37,24 @@
     </plugin>
   </gazebo>
 
+  <!-- ODOM -->
+  <gazebo>
+    <plugin name="odom_plugin" filename="libgazebo_ros_p3d.so">
+      <frameName>map</frameName>
+      <bodyName>base_link</bodyName>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>50.0</updateRate>
+      <topicName>odom</topicName>
+      <gaussianNoise>0.01</gaussianNoise>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+
   <!-- Intel RealSense Camera -->
   <xacro:include filename="$(find realsense_gazebo_plugin)/urdf/realsense-RS200.macro.xacro"/>
   <xacro:realsense-rs200 prefix="" parent="chassis">
-    <origin xyz="0.15 0 0.15" rpy="0 0 0" />
+    <origin xyz="0.1 0 0.1" rpy="0 0 0" />
   </xacro:realsense-rs200>
 
 </robot>

@@ -7,6 +7,7 @@ catkin_package()
 
 catkin_install_python(PROGRAMS
   scripts/ackermann_controller.py
+  scripts/cmd_vel_to_ackermann_drive.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

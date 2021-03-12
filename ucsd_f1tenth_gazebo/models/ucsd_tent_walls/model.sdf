@@ -1,0 +1,123 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='ucsd_tent_walls'>
+    <pose>0.112948 0 0 0 -0 0</pose>
+    <link name='Wall_10'>
+      <collision name='Wall_10_Collision'>
+        <geometry>
+          <box>
+            <size>8.15 0.15 4</size>
+          </box>
+        </geometry>
+        <pose>0 0 1.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_10_Visual'>
+        <pose>0 0 1.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>8.15 0.15 4</size>
+          </box>
+        </geometry>
+          <material>
+            <script>
+              <uri>model://ucsd_tent_walls/materials/scripts</uri>
+              <uri>model://ucsd_tent_walls/materials/textures</uri>
+              <name>Floor/ShortWall</name>
+            </script>
+          </material>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+      <pose>9.61255 0 0 0 -0 1.57067</pose>
+    </link>
+    <link name='Wall_11'>
+      <collision name='Wall_11_Collision'>
+        <geometry>
+          <box>
+            <size>19.376 0.15 4</size>
+          </box>
+        </geometry>
+        <pose>0 0 1.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_11_Visual'>
+        <pose>0 0 1.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>19.376 0.15 4</size>
+          </box>
+        </geometry>
+          <material>
+            <script>
+              <uri>model://ucsd_tent_walls/materials/scripts</uri>
+              <uri>model://ucsd_tent_walls/materials/textures</uri>
+              <name>Floor/LongWall</name>
+            </script>
+          </material>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+      <pose>5.2e-05 4 0 0 -0 3.14159</pose>
+    </link>
+    <link name='Wall_12'>
+      <collision name='Wall_12_Collision'>
+        <geometry>
+          <box>
+            <size>8.15 0.15 4</size>
+          </box>
+        </geometry>
+        <pose>0 0 1.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_12_Visual'>
+        <pose>0 0 1.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>8.15 0.15 4</size>
+          </box>
+        </geometry>
+          <material>
+            <script>
+              <uri>model://ucsd_tent_walls/materials/scripts</uri>
+              <uri>model://ucsd_tent_walls/materials/textures</uri>
+              <name>Floor/ShortWall</name>
+            </script>
+          </material>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+      <pose>-9.61295 0 0 0 -0 -1.5708</pose>
+    </link>
+    <link name='Wall_9'>
+      <collision name='Wall_9_Collision'>
+        <geometry>
+          <box>
+            <size>19.3752 0.15 4</size>
+          </box>
+        </geometry>
+        <pose>0 0 1.25 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_9_Visual'>
+        <pose>0 0 1.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>19.3752 0.15 4</size>
+          </box>
+        </geometry>
+          <material>
+            <script>
+              <uri>model://ucsd_tent_walls/materials/scripts</uri>
+              <uri>model://ucsd_tent_walls/materials/textures</uri>
+              <name>Floor/LongWall</name>
+            </script>
+          </material>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+      <pose>-0.000448 -4 0 0 -0 0</pose>
+    </link>
+    <static>1</static>
+  </model>
+</sdf>

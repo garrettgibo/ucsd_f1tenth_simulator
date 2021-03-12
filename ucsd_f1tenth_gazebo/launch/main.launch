@@ -3,7 +3,8 @@
   <arg name="gui" default="true"/>
   <arg name="paused" default="false"/>
   <arg name="starting_x" default="0"/>
-  <arg name="starting_y" default="2.2"/>
+  <arg name="starting_y" default="2.35"/>
+  <arg name="car_type" default="batmobile"/>
 
   <!-- simulation -->
   <include file="$(find ucsd_f1tenth_gazebo)/launch/ucsd_track_v1_world.launch">
@@ -21,13 +22,7 @@
     <arg name="pitch" value="0.0"/>
     <arg name="yaw" value="0" />
     <arg name="namespace" value="vehicle" />
+    <arg name="car_type" value="$(arg car_type)" />
   </include>
-
-  <include file="$(find ucsd_f1tenth_navigation)/launch/start_navigation.launch" />
-  <!-- <include file="$(find ucsd_f1tenth_navigation_v2)/launch/follow_waypoints.launch" > -->
-  <!--   <arg name="starting_x" value="$(arg starting_x)"/> -->
-  <!--   <arg name="starting_y" value="$(arg starting_y)"/> -->
-  <!-- </include>> -->
-
 
 </launch>

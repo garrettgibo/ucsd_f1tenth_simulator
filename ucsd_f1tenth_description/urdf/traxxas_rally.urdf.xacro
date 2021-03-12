@@ -37,6 +37,7 @@ limitations under the License.
 -->
 
 <robot name="em_3905" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="car_type" default="delorean" />
   <!-- Degree-to-radian conversions -->
   <xacro:property name="degrees_45" value="0.785398163"/>
   <xacro:property name="degrees_90" value="1.57079633"/>
@@ -45,7 +46,7 @@ limitations under the License.
        along the y axis, and chassis_height along the z axis. -->
   <xacro:property name="chassis_length" value="0.535"/>
   <xacro:property name="chassis_width" value="0.281"/>
-  <xacro:property name="chassis_height" value="0.01"/>
+  <xacro:property name="chassis_height" value="0.00"/>
   <xacro:property name="chassis_mass" value="2.788"/>
 
   <!-- battery_dist is the distance between the inner edges of the
@@ -72,6 +73,7 @@ limitations under the License.
   <xacro:property name="hex_hub_depth" value="0.0022"/>
   <xacro:property name="wheel_mass" value="0.29"/>
 
+
   <!-- hex_hub_dist is the distance between left and right hex hubs when
        the shock absorbers are fully extended. axle_length is the distance
        from a U joint to the corresponding hex hub. wheel_travel is the
@@ -81,6 +83,7 @@ limitations under the License.
   <xacro:property name="axle_length" value="0.02"/>
   <xacro:property name="wheel_travel" value="0.084"/>
   <xacro:property name="shock_z_offset" value="0.0655"/>
+
   <!-- shock_eff_limit is 2 * ((shock_stroke / 2) * shock_spring_constant) N.
        shock_stroke is 0.028575 meters. shock_spring_constant, an approximation
        of a Traxxas Ultra Shock shock absorber spring's constant, is
@@ -360,15 +363,15 @@ limitations under the License.
   <!-- Chassis -->
   <link name="chassis">
     <visual>
-      <origin xyz="0 0 ${-chassis_height / 2}"/>
+      <origin xyz="0 0 ${-chassis_height}"/>
       <geometry>
-	<box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+        <mesh filename="package://ucsd_f1tenth_description/meshes/$(arg car_type).stl" />
       </geometry>
       <material name="chassis_mat"/>
     </visual>
 
     <collision>
-      <origin xyz="0 0 ${-chassis_height / 2}"/>
+      <origin xyz="0 0 ${-chassis_height}"/>
       <geometry>
 	<box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
       </geometry>
@@ -377,7 +380,7 @@ limitations under the License.
     <xacro:solid_cuboid_inertial
 	width="${chassis_length}" depth="${chassis_width}"
 	height="${chassis_height}" mass="${chassis_mass}">
-      <origin xyz="0 0 ${-chassis_height / 2}"/>
+      <origin xyz="0 0 ${-chassis_height}"/>
     </xacro:solid_cuboid_inertial>
   </link>
   <gazebo reference="chassis">

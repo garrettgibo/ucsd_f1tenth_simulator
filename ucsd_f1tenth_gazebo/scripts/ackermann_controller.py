@@ -112,6 +112,7 @@ import rospy
 import tf
 
 from ackermann_msgs.msg import AckermannDrive
+from ackermann_msgs.msg import AckermannDriveStamped
 from std_msgs.msg import Float64
 from controller_manager_msgs.srv import ListControllers
 
@@ -254,7 +255,7 @@ class _AckermannCtrlr(object):
             _create_axle_cmd_pub(list_ctrlrs, right_rear_axle_ctrlr_name)
 
         self._ackermann_cmd_sub = \
-            rospy.Subscriber("ackermann_cmd", AckermannDrive,
+            rospy.Subscriber("ackermann_cmd", AckermannDriveStamped,
                              self.ackermann_cmd_cb, queue_size=1)
 
     def spin(self):
@@ -306,6 +307,7 @@ class _AckermannCtrlr(object):
           ackermann_cmd : ackermann_msgs.msg.AckermannDrive
             Ackermann driving command.
         """
+        ackermann_cmd = ackermann_cmd.drive
         self._last_cmd_time = rospy.get_time()
         with self._ackermann_cmd_lock:
             self._steer_ang = ackermann_cmd.steering_angle
@@ -474,5 +476,8 @@ def _get_steer_ang(phi):
 
 # main
 if __name__ == "__main__":
-    ctrlr = _AckermannCtrlr()
-    ctrlr.spin()
+    try:
+        ctrlr = _AckermannCtrlr()
+        ctrlr.spin()
+    except rospy.ROSInterruptException:
+        pass
